@@ -8,3 +8,17 @@
     url("/src/assets/fonts/HelveticaNeueRegular.woff") format("woff"),
     url("/src/assets/fonts/HelveticaNeueRegular.ttf") format("woff");
 }
+
+html,
+body {
+  height: 100vh;
+}
+#root {
+  height: 100vh;
+}
+.App {
+  height: 100vh;
+}
+.center-container {
+  margin: 0 auto;
+}

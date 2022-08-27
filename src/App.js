@@ -4,6 +4,8 @@ import { Button } from "components/Button";
 import { LaptopItem } from "components/LaptopItem";
 import { Radio } from "components/Radio";
 import { Input } from "components/Input";
+import { Landing } from "components/Landing";
+import { SuccessForm } from "components/SuccessForm";
 
 function App() {
   const [selected, setSelected] = useState("first");
@@ -11,7 +13,7 @@ function App() {
 
   return (
     <div className="App">
-      <Button title="ᲩᲐᲜᲐᲬᲔᲠᲘᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ" />
+      {/* <Button title="ᲩᲐᲜᲐᲬᲔᲠᲘᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ" />
       <LaptopItem
         imageUrl={
           "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/681px-Placeholder_view_vector.svg.png"
@@ -36,7 +38,9 @@ function App() {
         placeholder="Input"
         label="Label"
         disabled={false}
-      />
+      /> */}
+      {/* <Landing /> */}
+      <SuccessForm />
     </div>
   );
 }
