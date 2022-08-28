@@ -3,6 +3,7 @@ import React from "react";
 import LandingSvg from "assets/icons/landingFrame.svg";
 import LandingLogo from "assets/icons/landingLogo.svg";
 import landingSvgMobile from "assets/icons/landingFrameMobile.svg";
+import { Link } from "react-router-dom";
 
 export default function Landing() {
   return (
@@ -26,7 +27,9 @@ export default function Landing() {
 
       <div className="pt-[123px] max-w-[387px]">
         <div className="mb-[26px]">
-          <Button title="ᲩᲐᲜᲐᲬᲔᲠᲘᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ" />
+          <Link to="/UserForm">
+            <Button title="ᲩᲐᲜᲐᲬᲔᲠᲘᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ" />
+          </Link>
         </div>
         <div>
           <Button title="ᲩᲐᲜᲐᲬᲔᲠᲔᲑᲘᲡ ᲡᲘᲐ" />

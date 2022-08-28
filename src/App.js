@@ -6,6 +6,8 @@ import { Radio } from "components/Radio";
 import { Input } from "components/Input";
 import { Landing } from "components/Landing";
 import { SuccessForm } from "components/SuccessForm";
+import { Routes, Route, Link } from "react-router-dom";
+import { UserForm } from "components/UserForm";
 
 function App() {
   const [selected, setSelected] = useState("first");
@@ -39,8 +41,8 @@ function App() {
         label="Label"
         disabled={false}
       /> */}
-      {/* <Landing /> */}
-      <SuccessForm />
+      <Landing />
+      {/* <SuccessForm /> */}
     </div>
   );
 }
