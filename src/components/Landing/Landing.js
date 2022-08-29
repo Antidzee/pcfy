@@ -27,12 +27,12 @@ export default function Landing() {
 
       <div className="pt-[123px] max-w-[387px]">
         <div className="mb-[26px]">
-          <Link to="/UserForm">
-            <Button title="ᲩᲐᲜᲐᲬᲔᲠᲘᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ" />
+          <Link to="/user-info">
+            <Button title="ᲩᲐᲜᲐᲬᲔᲠᲘᲡ ᲓᲐᲛᲐᲢᲔᲑᲐ" styles="w-[387px]" />
           </Link>
         </div>
         <div>
-          <Button title="ᲩᲐᲜᲐᲬᲔᲠᲔᲑᲘᲡ ᲡᲘᲐ" />
+          <Button title="ᲩᲐᲜᲐᲬᲔᲠᲔᲑᲘᲡ ᲡᲘᲐ" styles="w-[387px]" />
         </div>
       </div>
     </div>
