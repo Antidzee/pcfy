@@ -1,10 +1,10 @@
 import React from "react";
-import { UserForm } from "components/UserForm";
+import { LaptopForm } from "components/LaptopForm";
 
 export default function AddUser() {
   return (
     <>
-      <UserForm />
+      <LaptopForm />
     </>
   );
 }

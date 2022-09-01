@@ -2,6 +2,7 @@ import React from "react";
 
 export default function Input({
   hint,
+  type,
   label,
   onChange,
   value,
@@ -12,14 +13,15 @@ export default function Input({
   return (
     <div className="flex flex-col items-start w-full">
       {label && (
-        <span className="mb-2 text-black font-bold font-helvetica text-[18px] leading-[21px]">
+        <span className="mb-2 text-black font-bold  text-[18px] leading-[21px]">
           {label}
         </span>
       )}
       <input
-        className={`${styles} w-full border-[1.8px] border-[#8AC0E2] rounded-lg pl-[8px] py-2 font-helvetica text-[16px] leading-[21px] font-normal text-[#666666]`}
+        className={`${styles} h-[60px] w-full border-[1.8px] border-[#8AC0E2] rounded-lg pl-[8px] py-2 font-helvetica text-[16px] leading-[21px] font-normal text-[#666666]`}
         placeholder={placeholder}
         disabled={disabled}
+        type={type}
         classes="width"
         styles={styles}
         value={value}

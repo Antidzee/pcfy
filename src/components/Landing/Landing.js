@@ -32,7 +32,9 @@ export default function Landing() {
           </Link>
         </div>
         <div>
-          <Button title="ᲩᲐᲜᲐᲬᲔᲠᲔᲑᲘᲡ ᲡᲘᲐ" styles="w-[387px]" />
+          <Link to="/product-list">
+            <Button title="ᲩᲐᲜᲐᲬᲔᲠᲔᲑᲘᲡ ᲡᲘᲐ" styles="w-[387px]" />
+          </Link>
         </div>
       </div>
     </div>

@@ -7,6 +7,10 @@ import { Button } from "components/Button";
 import "./index.css";
 
 export default function UserForm() {
+  const emailValidation = (email) => {
+    if (email.includes("@redberry.ge")) return true;
+    else return false;
+  };
   return (
     <div className="bg-[#F6F6F6] w-full h-full">
       {/* headline */}
@@ -30,15 +34,16 @@ export default function UserForm() {
       </div>
       {/* end of headline */}
       {/* content */}
-      <div className="w-[1226px] h-[973px] bg-white flex justify-center m-auto mt-[43px] rounded-lg pt-[49px] px-[174px]">
+      <div className="max-w-[1226px] bg-white flex justify-center m-auto mt-[43px] rounded-lg pt-[49px] px-[174px]">
         {/* input wrapper */}
         <div className="w-full flex flex-col">
-          <div className="flex w-full justify-between">
-            <div className="w-[48%]">
+          <div className="flex w-full justify-between sm:flex-col">
+            <div className="w-[48%] ">
               <Input
                 label="სახელი"
                 placeholder="გრიშა"
                 hint="მინიმუმ 2 სიმბოლო, ქართული ასოები"
+                styles="h-[60px]"
               />
             </div>
             <div className="w-[48%]">
@@ -46,33 +51,37 @@ export default function UserForm() {
                 label="გვარი"
                 placeholder="ბაგრატიონი"
                 hint="მინიმუმ 2 სიმბოლო, ქართული ასოები"
+                styles="h-[60px]"
               />
             </div>
           </div>
           <div className="flex flex-col">
-            <select className="w-[878px] h-[60px] bg-[#EBEBEB] rounded-lg my-[52px] px-2">
+            <select className="w-full h-[60px] bg-[#EBEBEB] rounded-lg my-[52px] px-2">
               <option>თიმი</option>
             </select>
-            <select className="w-[878px] h-[60px] bg-[#EBEBEB] rounded-lg px-2">
+            <select className="w-full h-[60px] bg-[#EBEBEB] rounded-lg px-2">
               <option>პოზიცია</option>
             </select>
             <div className="my-[52px]">
               <Input
                 label="მეილი"
                 placeholder="grish666@redberry.ge"
+                type="email"
                 hint="უნდა მთავრდებოდეს @redberry.ge-ით"
-                styles="w-[878px] h-[60px]"
+                styles={`w-full h-[60px]`}
               />
             </div>
             <Input
               label="ტელეფონის ნომერი"
               placeholder="+995 598 00 07 01"
               hint="უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს"
-              styles="w-[878px] h-[60px]"
+              styles="w-full h-[60px]"
             />
           </div>
-          <div className="mt-[87px] flex justify-end">
-            <Button title="შემდეგი" styles="w-[176px]" />
+          <div className="mt-[87px] flex justify-end mb-[63px]">
+            <NavLink to="/laptop-info" activeClassName="active">
+              <Button title="შემდეგი" styles="w-[176px] " />
+            </NavLink>
           </div>
         </div>
         {/* end of input wrapper */}

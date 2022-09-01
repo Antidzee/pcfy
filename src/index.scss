@@ -19,3 +19,9 @@ input[type="text"]:disabled {
 .userForm-name-input {
   width: 500px;
 }
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+  display: none;
+  -webkit-appearance: none;
+}

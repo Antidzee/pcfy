@@ -18,7 +18,7 @@ export default function Radio({ selected, onChange, text, value }) {
           }`}
         />
       </div>
-      <div className="text-black text-[16px] leading-[21px] font-normal font-helvetica">
+      <div className="text-black text-[16px] leading-[21px] font-normal">
         {text}
       </div>
     </div>
