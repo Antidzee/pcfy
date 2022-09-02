@@ -15,11 +15,7 @@ export default function ProductList() {
         <h1 className=" font-bold text-[34px]">ჩანაწერების სია</h1>
       </div>
       <div className="flex justify-center">
-        <div className=" grid gap-14 grid-cols-2 grid-rows-4">
-          <LaptopItem />
-          <LaptopItem />
-          <LaptopItem />
-          <LaptopItem />
+        <div className=" grid gap-14 grid-cols-2 grid-rows-4 sm:grid-cols-1">
           <LaptopItem />
           <LaptopItem />
           <LaptopItem />

@@ -16,9 +16,9 @@ export default function LaptopForm() {
           </button>
         </Link>
 
-        <div className="flex justify-center text-[20px] leading-6 font-bold">
+        <div className="flex justify-center text-[20px] leading-6 font-bold ">
           <NavLink
-            className={"mr-[66px]"}
+            className={"mr-[66px] sm:hidden"}
             to="/user-info"
             activeClassName="active"
           >
@@ -30,24 +30,24 @@ export default function LaptopForm() {
         </div>
       </div>
 
-      <div className="max-w-[1226px] bg-white flex flex-col items-start m-auto mt-[43px] rounded-lg pt-[49px] px-[174px]">
-        <div className="flex items-center w-full justify-between sm:flex-col border-b-[1px] border-b-[#C7C7C7] pb-[52px] ">
-          <div className="w-[48%] ">
+      <div className="max-w-[1226px] bg-white flex flex-col items-start m-auto mt-[43px] rounded-lg pt-[49px] px-[174px] sm:px-[24px] sm:flex-col ">
+        <div className="flex items-center w-full justify-between border-b-[1px] border-b-[#C7C7C7] pb-[52px] sm:flex-col sm:rounded-xl sm:border-none sm:pb-0 text-light-green ">
+          <div className="w-[48%] sm:w-[100%] ">
             <Input
               label="ლეპტოპის სახელი"
               placeholder="HP"
               hint="ლათინური ასოები, ციფრები, !@#$%^&*()_+= "
             />
           </div>
-          <div className="w-[48%] ">
+          <div className="w-[48%] sm:w-[100%] ">
             <select className="w-full h-[60px] bg-[#EBEBEB] rounded-lg my-[52px] px-2">
               <option>ლეპტოპის ბრენდი</option>
             </select>
           </div>
         </div>
         <div className="flex flex-col w-full pt-[52px]">
-          <div className="flex items-center gap-6 w-full">
-            <select className="w-full h-[60px] bg-[#EBEBEB] rounded-lg my-[52px] px-2 ">
+          <div className="flex items-center gap-6 w-full sm:flex-col">
+            <select className="w-full h-[60px] bg-[#EBEBEB] rounded-lg my-[52px] px-2  sm:my-0">
               <option>CPU</option>
             </select>
             <Input
@@ -61,7 +61,7 @@ export default function LaptopForm() {
               placeholder="365"
             />{" "}
           </div>
-          <div className="flex w-full border-b-[1px] border-b-[#C7C7C7] pb-[52px]">
+          <div className="flex w-full border-b-[1px] border-b-[#C7C7C7] pb-[52px] sm:flex-col sm:border-none sm:pb-0 ">
             <Input
               label="ლეპტოპის RAM (GB)"
               hint="მხოლოდ ციფრები"
@@ -71,7 +71,7 @@ export default function LaptopForm() {
             <Radio text="SSD" />
             <Radio text="HDD" />
           </div>
-          <div className="flex justify-center  gap-9 pt-[52px]">
+          <div className="flex justify-center  gap-9 pt-[52px] sm:flex-col">
             <Input
               label="შეძენის რიცხვი (არჩევითი)"
               placeholder="დდ / თთ / წწწწ"
@@ -99,7 +99,7 @@ export default function LaptopForm() {
           </div>
         </div>
       </div>
-      <div className="flex justify-center py-[56px]">
+      <div className="flex justify-center py-[56px] sm:hidden">
         <img src={FormLogo} />
       </div>
     </div>

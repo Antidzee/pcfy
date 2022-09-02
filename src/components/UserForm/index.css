@@ -5,3 +5,10 @@ body {
   border-bottom: 1px solid #000000;
   padding-bottom: 15px;
 }
+
+@media only screen and (-webkit-min-device-pixel-ratio: 3) {
+  .active {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+}
