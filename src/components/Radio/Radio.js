@@ -1,10 +1,10 @@
 import React from "react";
 import "./index.css";
 
-export default function Radio({ selected, onChange, text, value }) {
+export default function Radio({ selected, onChange, text, value, styles }) {
   return (
     <div
-      className="radio-container"
+      className={`${styles} radio-container`}
       onClick={() => {
         onChange(value);
       }}

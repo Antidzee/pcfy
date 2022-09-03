@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink, Link } from "react-router-dom";
 import FormArrow from "assets/icons/backArrow.svg";
 import FormArrowMobile from "assets/icons/backArrowMobile.svg";
@@ -6,8 +6,57 @@ import FormLogo from "assets/icons/userFormLogo.svg";
 import { Input } from "components/Input";
 import { Radio } from "components/Radio";
 import { Button } from "components/Button";
+import { fetchCpus, fetchBrands } from "api/services/general";
+import { Dropdown } from "components/Dropdown";
+import { useLocalStorage } from "helpers/localStorage";
 
 export default function LaptopForm() {
+  const [laptopName, setLaptopName] = useLocalStorage("laptop_name", "");
+  const [laptopBrand, setLaptopBrand] = useLocalStorage("laptop_brand_id", "");
+  const [laptopImage, setLaptopImage] = useLocalStorage("laptop_image", "");
+
+  const [cpu, setCpu] = useLocalStorage("laptop_cpu", "");
+  const [cpuCores, setCpuCores] = useLocalStorage("laptop_cpu_cores", "");
+  const [cpuThreads, setCpuThreads] = useLocalStorage("laptop_cpu_threads", "");
+  const [memory, setMemory] = useLocalStorage("laptop_ram", "");
+
+  const [hardDriveType, setHardDriveType] = useLocalStorage(
+    "laptop_hard_drive_type",
+    ""
+  );
+  const [isNew, setIsNew] = useLocalStorage("laptop_state", "");
+
+  const [date, setDate] = useLocalStorage("laptop_purchase_date", "");
+  const [price, setPrice] = useLocalStorage("laptop_price", "");
+
+  const [cpus, setCpus] = useState(null);
+  const [brands, setBrands] = useState(null);
+
+  const fetchCpusData = () => {
+    fetchCpus()
+      .then((data) => {
+        setCpus(data.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const fetchBrandsData = () => {
+    fetchBrands()
+      .then((data) => {
+        setBrands(data.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchCpusData();
+    fetchBrandsData();
+  }, []);
+
   return (
     <div>
       <div className="bg-[#F6F6F6] w-full h-full">
@@ -31,7 +80,7 @@ export default function LaptopForm() {
             </button>
           </NavLink>
           <NavLink
-            to="/laptop-info"
+            to="/laptop-form"
             activeClassName="active "
             className="sm:m-auto"
           >
@@ -47,51 +96,92 @@ export default function LaptopForm() {
         <div className="flex items-center w-full justify-between border-b-[1px] border-b-[#C7C7C7] pb-[52px] sm:flex-col sm:rounded-xl sm:border-none sm:pb-0 ">
           <div className="w-[48%] sm:w-[100%] ">
             <Input
+              onChange={setLaptopName}
+              value={laptopName}
               label="ლეპტოპის სახელი"
               placeholder="HP"
               hint="ლათინური ასოები, ციფრები, !@#$%^&*()_+= "
             />
           </div>
-          <div className="w-[48%] sm:w-[100%] ">
-            <select className="w-full h-[60px] bg-[#EBEBEB] rounded-lg my-[52px] px-2">
-              <option>ლეპტოპის ბრენდი</option>
-            </select>
+          <div className="w-[48%] sm:w-[100%]">
+            {brands && (
+              <Dropdown
+                data={brands}
+                title="ლეპტოპის ბრენდი"
+                onChange={setLaptopBrand}
+                selected={laptopBrand}
+              />
+            )}
           </div>
         </div>
         <div className="flex flex-col w-full pt-[52px] sm:pt-0">
           <div className="flex items-center gap-6 w-full sm:flex-col">
-            <select className="w-full h-[60px] bg-[#EBEBEB] rounded-lg my-[52px] px-2  sm:my-0">
-              <option>CPU</option>
-            </select>
+            {cpus && (
+              <Dropdown
+                data={cpus}
+                styles="my-[45px]"
+                title="CPU"
+                onChange={setCpu}
+                selected={cpu}
+              />
+            )}
             <Input
+              onChange={setCpuCores}
+              value={cpuCores}
               label="CPU-ს ბირთვი"
               hint="მხოლოდ ციფრები"
               placeholder="14"
             />
             <Input
+              onChange={setCpuThreads}
+              value={cpuThreads}
               label="CPU-ს ნაკადი"
               hint="მხოლოდ ციფრები"
               placeholder="365"
             />{" "}
           </div>
-          <div className="border-b-[1px] border-b-[#C7C7C7] pb-[52px] sm:flex-col sm:border-none sm:pb-0 ">
-            <div className="w-[407px] sm:w-full">
+          <div className="border-b-[1px] border-b-[#C7C7C7] pb-[52px] sm:flex-col sm:border-none sm:pb-0 flex">
+            <div className="w-[50%] sm:w-full">
               <Input
+                onChange={setMemory}
+                value={memory}
                 label="ლეპტოპის RAM (GB)"
                 hint="მხოლოდ ციფრები"
                 placeholder="16"
                 styles=""
               />
             </div>
+            <div className="w-[50%] flex flex-col ml-[40px]">
+              <h1>ლეპტოპის მდგომარეობა</h1>
+              <div className="flex flex-row">
+                <Radio
+                  text="HDD"
+                  value={"hdd"}
+                  onChange={setHardDriveType}
+                  selected={hardDriveType}
+                />
+                <Radio
+                  styles="pl-[60px]"
+                  text="SSD"
+                  value={"ssd"}
+                  onChange={setHardDriveType}
+                  selected={hardDriveType}
+                />
+              </div>
+            </div>
           </div>
           <div className="flex justify-center  gap-9 pt-[52px] sm:flex-col">
             <Input
+              onChange={setDate}
+              value={date}
               label="შეძენის რიცხვი (არჩევითი)"
               placeholder="დდ / თთ / წწწწ"
               type="date"
             />
 
             <Input
+              onChange={setPrice}
+              value={price}
               label="ლეპტოპის ფასი"
               placeholder="0000"
               hint="მხოლოდ ციფრები"
@@ -100,8 +190,18 @@ export default function LaptopForm() {
           <div className="pt-[75px]">
             <h1>ლეპტოპის მდგომარეობა</h1>
             <div className="flex gap-16">
-              <Radio text="ახალი" />
-              <Radio text="მეორადი" />
+              <Radio
+                text="ახალი"
+                value={"new"}
+                onChange={setIsNew}
+                selected={isNew}
+              />
+              <Radio
+                text="მეორადი"
+                value={"secondary"}
+                onChange={setIsNew}
+                selected={isNew}
+              />
             </div>
           </div>
           <div className="flex justify-between items-center mt-[97px] mb-[63px]">

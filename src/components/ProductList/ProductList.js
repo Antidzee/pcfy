@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { LaptopItem } from "components/LaptopItem";
 import { NavLink, Link } from "react-router-dom";
 import FormArrow from "assets/icons/backArrow.svg";
 import FormArrowMobile from "assets/icons/backArrowMobile.svg";
+import { fetchLaptops } from "api/services/laptops";
 
 export default function ProductList() {
+  const [laptops, setLaptops] = useState(null);
+  console.log(laptops);
+  const fetchLaptopsData = () => {
+    fetchLaptops()
+      .then((data) => {
+        setLaptops(data.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  useEffect(() => {
+    fetchLaptopsData();
+  }, []);
+
   return (
     <div>
-      <Link to="/laptop-form">
+      <Link to="/">
         <button>
           <img src={FormArrow} className="ml-[73px] mt-[53px] sm:hidden" />
         </button>

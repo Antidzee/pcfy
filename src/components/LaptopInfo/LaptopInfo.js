@@ -43,24 +43,29 @@ export default function LaptopInfo() {
             </div>
           </div>
         </div>
-        <div className="border-b-[1px] border-[#A5A5A5] pb-10 ">
+        <div className="border-b-[1px] border-[#A5A5A5] pb-10 flex flex-row justify-between sm:flex-col">
           <div className="flex sm:flex sm:justify-start sm:items-center pt-[29px]">
             <div className="font-medium ">
               <p>ლეპტოპის სახელი:</p>
               <p>ლეპტოპის ბრენდი:</p>
               <p>RAM:</p>
               <p>მეხსიერების ტიპი:</p>
-              <div className="">
-                <p>CPU:</p>
-                <p>CPU-ს ბირთვი:</p>
-                <p>CPU-ს ნაკადი:</p>
-              </div>
             </div>
             <div className="ml-[61px] text-[#797979] font-normal ">
               <p>Razor Blade</p>
               <p>HP</p>
               <p>16</p>
               <p>SSD</p>
+            </div>
+          </div>
+
+          <div className="flex sm:flex sm:justify-start sm:items-center pt-[29px]">
+            <div className="font-medium ">
+              <p>CPU:</p>
+              <p>CPU-ს ბირთვი:</p>
+              <p>CPU-ს ნაკადი:</p>
+            </div>
+            <div className="ml-[61px] text-[#797979] font-normal ">
               <p>intel 5</p>
               <p>5</p>
               <p>515</p>

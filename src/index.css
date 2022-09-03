@@ -15,3 +15,34 @@ body {
 .center-container {
   margin: 0 auto;
 }
+
+@font-face {
+  font-family: "helvetica";
+  src: url("./assets/fonts/HelveticaNeue-01.ttf");
+}
+
+@font-face {
+  font-family: "helvetica-bold";
+  src: url("./assets/fonts/HelveticaNeue-Bold-02.ttf");
+}
+
+@font-face {
+  font-family: "helvetica-light";
+  src: url("./assets/fonts/HelveticaNeue-Light-08.ttf");
+}
+
+@font-face {
+  font-family: "helvetica-medium";
+  src: url("./assets/fonts/HelveticaNeue-Medium-11.ttf");
+}
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
