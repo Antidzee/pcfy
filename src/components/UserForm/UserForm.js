@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
+import FormArrowMobile from "assets/icons/backArrowMobile.svg";
 import FormArrow from "assets/icons/backArrow.svg";
 import FormLogo from "assets/icons/userFormLogo.svg";
 import { Input } from "components/Input";
@@ -15,17 +16,25 @@ export default function UserForm() {
     <div className="bg-[#F6F6F6] w-full h-full flex flex-col">
       {/* headline */}
       <Link to="/">
-        <button>
+        <button className="sm:hidden">
           <img src={FormArrow} className="ml-[73px] mt-[53px]" />
         </button>
       </Link>
-      <div className="flex justify-center text-[20px] leading-6 font-bold">
+      <div className="flex justify-center text-[20px] leading-6 font-bold sm:justify-start sm:ml-[16px] sm:mt-[31px]">
+        <NavLink to="/" activeClassName="active">
+          <button className="hidden sm:inline">
+            <img src={FormArrowMobile} />
+          </button>
+        </NavLink>
         <NavLink
-          className={"mr-[66px] sm:border-0"}
+          className={"mr-[66px] sm:border-0 sm:m-auto"}
           to="/user-info"
           activeClassName="active"
         >
           <h1>თანამშრომლის ინფო</h1>
+          <p className="hidden sm:flex text-[14px] text-[#898989] font-normal justify-center items-center">
+            1/2
+          </p>
         </NavLink>
 
         <NavLink
@@ -42,7 +51,7 @@ export default function UserForm() {
         {/* input wrapper */}
         <div className="max-w-[1226px] flex flex-col  bg-white justify-center m-auto mt-[43px] rounded-lg pt-[49px] px-[174px] sm:px-[24px]">
           <div className="flex justify-between sm:flex-col ">
-            <div className="w-[48%] sm:w-[100%]">
+            <div className="w-[48%] sm:w-[100%] sm:mb-[23px]">
               <Input
                 label="სახელი"
                 placeholder="გრიშა"
@@ -83,7 +92,7 @@ export default function UserForm() {
             />
           </div>
           <div className="mt-[87px] flex justify-end mb-[63px]">
-            <NavLink to="/laptop-info" activeClassName="active">
+            <NavLink to="/laptop-form" activeClassName="active">
               <Button title="შემდეგი" styles="px-[45px] py-[18px] " />
             </NavLink>
           </div>

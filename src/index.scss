@@ -25,3 +25,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   display: none;
   -webkit-appearance: none;
 }
+
+.laptop-description {
+  p {
+    padding-bottom: 22px;
+  }
+}
+
+@media only screen and (-webkit-min-device-pixel-ratio: 3) {
+  .laptop-description {
+    p {
+      padding-bottom: 0;
+    }
+  }
+}

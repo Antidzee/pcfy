@@ -1,4 +1,5 @@
 import React from "react";
+import { NavLink, Link } from "react-router-dom";
 
 export default function LaptopItem({
   userName = "ირინე ჩანქსელიანი",
@@ -23,9 +24,11 @@ export default function LaptopItem({
             {laptopName}
           </span>
         </div>
-        <button className="text-[#4386A9] underline text-[16px] leading-[21px] font-normal font-helvetica pb-6 sm:pb-[15px] text-start sm:text-[14px]">
-          მეტის ნახვა
-        </button>
+        <NavLink to="/laptop-info" activeClassName="active">
+          <button className="text-[#4386A9] underline text-[16px] leading-[21px] font-normal font-helvetica pb-6 sm:pb-[15px] text-start sm:text-[14px]">
+            მეტის ნახვა
+          </button>
+        </NavLink>
       </div>
     </div>
   );

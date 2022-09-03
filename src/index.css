@@ -2,13 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "helvetica";
-  src: url("/src/assets/fonts/HelveticaNeueRegular.woff2") format("woff2"),
-    url("/src/assets/fonts/HelveticaNeueRegular.woff") format("woff"),
-    url("/src/assets/fonts/HelveticaNeueRegular.ttf") format("woff");
-}
-
 html,
 body {
   height: 100vh;
