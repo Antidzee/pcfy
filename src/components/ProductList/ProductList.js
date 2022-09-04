@@ -7,7 +7,7 @@ import { fetchLaptops } from "api/services/laptops";
 
 export default function ProductList() {
   const [laptops, setLaptops] = useState(null);
-  console.log(laptops);
+
   const fetchLaptopsData = () => {
     fetchLaptops()
       .then((data) => {
@@ -26,13 +26,17 @@ export default function ProductList() {
     <div>
       <Link to="/">
         <button>
-          <img src={FormArrow} className="ml-[73px] mt-[53px] sm:hidden" />
+          <img
+            src={FormArrow}
+            alt="Arrow"
+            className="ml-[73px] mt-[53px] sm:hidden"
+          />
         </button>
       </Link>
       <div className="flex justify-center mb-[97px] sm:justify-start sm:ml-[16px]">
         <NavLink to="/" activeClassName="active">
           <button className="hidden sm:inline ">
-            <img src={FormArrowMobile} />
+            <img src={FormArrowMobile} alt="arrow" />
           </button>
         </NavLink>
         <h1 className=" font-bold text-[34px] sm:text-[16px] sm:m-auto">
@@ -41,12 +45,17 @@ export default function ProductList() {
       </div>
       <div className="flex justify-center">
         <div className=" grid gap-14 grid-cols-2 grid-rows-4 sm:grid-cols-1 pb-[54px]">
-          <LaptopItem imageUrl="https://icity.ge/wp-content/uploads/2020/04/macbook-air-space-gray-select-201810.jpeg" />
-          <LaptopItem imageUrl="https://icity.ge/wp-content/uploads/2020/04/macbook-air-space-gray-select-201810.jpeg" />
-          <LaptopItem imageUrl="https://icity.ge/wp-content/uploads/2020/04/macbook-air-space-gray-select-201810.jpeg" />
-          <LaptopItem imageUrl="https://icity.ge/wp-content/uploads/2020/04/macbook-air-space-gray-select-201810.jpeg" />
-          <LaptopItem imageUrl="https://icity.ge/wp-content/uploads/2020/04/macbook-air-space-gray-select-201810.jpeg" />
-          <LaptopItem imageUrl="https://icity.ge/wp-content/uploads/2020/04/macbook-air-space-gray-select-201810.jpeg" />
+          {laptops !== null ? (
+            laptops.map((item) => {
+              <LaptopItem
+                imageUrl={item.laptop.image}
+                laptopName={item.laptop.name}
+                userName={`${item.user.name} ${item.user.surname}`}
+              />;
+            })
+          ) : (
+            <div>Nothing to show</div>
+          )}
         </div>
       </div>
     </div>

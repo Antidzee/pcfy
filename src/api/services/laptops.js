@@ -1,11 +1,12 @@
 import { axiosClient } from "../apiClient";
 
-export function createLaptop(data) {
-  return axiosClient.post("/create", JSON.stringify(data));
+export function create(data) {
+  console.log(data);
+  return axiosClient.post("/laptop/create", JSON.stringify(data));
 }
 
 export function fetchLaptops() {
-  return axiosClient.get("/laptops");
+  return axiosClient.get(`/laptops?token=${process.env.REACT_APP_TOKEN}`);
 }
 
 export function fetchLaptop(id) {

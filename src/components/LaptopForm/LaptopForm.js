@@ -7,8 +7,10 @@ import { Input } from "components/Input";
 import { Radio } from "components/Radio";
 import { Button } from "components/Button";
 import { fetchCpus, fetchBrands } from "api/services/general";
+import { create } from "api/services/laptops";
 import { Dropdown } from "components/Dropdown";
-import { useLocalStorage } from "helpers/localStorage";
+import { ImageUpload } from "components/ImageUpload";
+import { useLocalStorage, getStorageValue } from "helpers/localStorage";
 
 export default function LaptopForm() {
   const [laptopName, setLaptopName] = useLocalStorage("laptop_name", "");
@@ -52,6 +54,31 @@ export default function LaptopForm() {
       });
   };
 
+  const createLaptop = () => {
+    create({
+      name: getStorageValue("name"),
+      surname: getStorageValue("surname"),
+      team_id: getStorageValue("team_id"),
+      position_id: getStorageValue("position_id"),
+      phone_number: getStorageValue("phone_number"),
+      email: getStorageValue("email"),
+      token: process.env.REACT_APP_TOKEN,
+      laptop_name: getStorageValue("laptop_name"),
+      laptop_image: getStorageValue("laptop_image"),
+      laptop_brand_id: getStorageValue("laptop_brand_id"),
+      laptop_cpu: getStorageValue("laptop_cpu"),
+      laptop_cpu_cores: getStorageValue("laptop_cpu_cores"),
+      laptop_cpu_threads: getStorageValue("laptop_cpu_threads"),
+      laptop_ram: getStorageValue("laptop_ram"),
+      laptop_hard_drive_type: getStorageValue("laptop_hard_drive_type"),
+      laptop_state: getStorageValue("laptop_state"),
+      laptop_purchase_date: getStorageValue("laptop_purchase_date"),
+      laptop_price: getStorageValue("laptop_price"),
+    }).catch((error) => {
+      console.log(error);
+    });
+  };
+
   useEffect(() => {
     fetchCpusData();
     fetchBrandsData();
@@ -93,6 +120,9 @@ export default function LaptopForm() {
       </div>
 
       <div className="max-w-[1226px] bg-white flex flex-col items-start m-auto mt-[43px] rounded-lg pt-[49px] px-[174px] sm:px-[24px] sm:flex-col ">
+        <div className="m-auto mb-[42px]">
+          <ImageUpload />
+        </div>
         <div className="flex items-center w-full justify-between border-b-[1px] border-b-[#C7C7C7] pb-[52px] sm:flex-col sm:rounded-xl sm:border-none sm:pb-0 ">
           <div className="w-[48%] sm:w-[100%] ">
             <Input
@@ -103,12 +133,13 @@ export default function LaptopForm() {
               hint="ლათინური ასოები, ციფრები, !@#$%^&*()_+= "
             />
           </div>
+
           <div className="w-[48%] sm:w-[100%]">
             {brands && (
               <Dropdown
                 data={brands}
                 title="ლეპტოპის ბრენდი"
-                onChange={setLaptopBrand}
+                onChange={(e) => setLaptopBrand(e.outerText)}
                 selected={laptopBrand}
               />
             )}
@@ -121,7 +152,7 @@ export default function LaptopForm() {
                 data={cpus}
                 styles="my-[45px]"
                 title="CPU"
-                onChange={setCpu}
+                onChange={(e) => setCpu(e.outerText)}
                 selected={cpu}
               />
             )}
@@ -129,6 +160,7 @@ export default function LaptopForm() {
               onChange={setCpuCores}
               value={cpuCores}
               label="CPU-ს ბირთვი"
+              type="number"
               hint="მხოლოდ ციფრები"
               placeholder="14"
             />
@@ -136,6 +168,7 @@ export default function LaptopForm() {
               onChange={setCpuThreads}
               value={cpuThreads}
               label="CPU-ს ნაკადი"
+              type="number"
               hint="მხოლოდ ციფრები"
               placeholder="365"
             />{" "}
@@ -147,6 +180,7 @@ export default function LaptopForm() {
                 value={memory}
                 label="ლეპტოპის RAM (GB)"
                 hint="მხოლოდ ციფრები"
+                type="number"
                 placeholder="16"
                 styles=""
               />
@@ -156,14 +190,14 @@ export default function LaptopForm() {
               <div className="flex flex-row">
                 <Radio
                   text="HDD"
-                  value={"hdd"}
+                  value={"HDD"}
                   onChange={setHardDriveType}
                   selected={hardDriveType}
                 />
                 <Radio
                   styles="pl-[60px]"
                   text="SSD"
-                  value={"ssd"}
+                  value={"SSD"}
                   onChange={setHardDriveType}
                   selected={hardDriveType}
                 />
@@ -184,6 +218,7 @@ export default function LaptopForm() {
               value={price}
               label="ლეპტოპის ფასი"
               placeholder="0000"
+              type="number"
               hint="მხოლოდ ციფრები"
             />
           </div>
@@ -198,7 +233,7 @@ export default function LaptopForm() {
               />
               <Radio
                 text="მეორადი"
-                value={"secondary"}
+                value={"used"}
                 onChange={setIsNew}
                 selected={isNew}
               />
@@ -208,9 +243,9 @@ export default function LaptopForm() {
             <Link to="/user-info">
               <button className=" text-[#62A1EB] font-medium">უკან</button>
             </Link>
-            <NavLink to="/success-window" activeClassName="active">
+            <div onClick={() => createLaptop()}>
               <Button title="დამახსოვრება" styles="py-[18px] px-[35.5px] " />
-            </NavLink>
+            </div>
           </div>
         </div>
       </div>

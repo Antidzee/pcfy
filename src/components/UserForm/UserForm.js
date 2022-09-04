@@ -9,17 +9,36 @@ import "./index.css";
 import { fetchTeams, fetchPositions } from "api/services/general";
 import { Dropdown } from "components/Dropdown";
 import { useLocalStorage } from "helpers/localStorage";
+import { useNavigate } from "react-router-dom";
+
+import {
+  minLength,
+  hasLength,
+  isGeorgian,
+  phoneValidation,
+  emailValidation,
+} from "helpers/formValidation";
 
 export default function UserForm() {
   const [positions, setPositions] = useState(null);
   const [teams, setTeams] = useState(null);
-
   const [name, setName] = useLocalStorage("name", "");
   const [surname, setSurname] = useLocalStorage("surname", "");
   const [email, setEmail] = useLocalStorage("email", "");
   const [phoneNumber, setPhoneNumber] = useLocalStorage("phone_number", "");
   const [positionId, setPositionId] = useLocalStorage("position_id", "");
   const [teamId, setTeamId] = useLocalStorage("team_id", "");
+
+  const [errors, setErrors] = useState({
+    email: null,
+    name: null,
+    surname: null,
+    phone: null,
+    team: null,
+    position: null,
+  });
+
+  const navigate = useNavigate();
 
   const fetchPositionsData = () => {
     fetchPositions()
@@ -41,9 +60,54 @@ export default function UserForm() {
       });
   };
 
+  const validate = () => {
+    setErrors({
+      email: emailValidation(email),
+      name: isGeorgian(name) || minLength(name, 2),
+      surname: isGeorgian(surname) || minLength(surname, 2),
+      phone: phoneValidation(phoneNumber),
+      team: hasLength(teamId),
+      position: hasLength(positionId),
+    });
+  };
+  const isNullish = Object.values(errors).every((value) => {
+    if (value === null) {
+      return true;
+    }
+
+    return false;
+  });
+
+  /* It checks if all the values in the errors object are true. */
+  const areTrue = Object.values(errors).every((value) => value === true);
+
+  const nextStep = () => {
+    validate();
+
+    if (
+      emailValidation(email) ||
+      isGeorgian(name) ||
+      minLength(name, 2) ||
+      isGeorgian(surname) ||
+      minLength(surname, 2) ||
+      phoneValidation(phoneNumber) ||
+      hasLength(teamId) ||
+      hasLength(positionId)
+    ) {
+      validate();
+      console.log("There are errors");
+    } else if (isNullish) {
+      validate();
+      console.log("There are errors");
+    } else if (!areTrue) {
+      navigate("/laptop-form");
+    }
+  };
+
   useEffect(() => {
     fetchPositionsData();
     fetchTeamsData();
+    validate();
   }, []);
 
   return (
@@ -81,13 +145,15 @@ export default function UserForm() {
       </div>
       {/* end of headline */}
       {/* content */}
-      <div className="">
+      <div>
         {/* input wrapper */}
         <div className="max-w-[1226px] flex flex-col  bg-white justify-center m-auto mt-[43px] rounded-lg pt-[49px] px-[174px] sm:px-[24px]">
           <div className="flex justify-between sm:flex-col ">
             <div className="w-[48%] sm:w-[100%] sm:mb-[23px]">
               <Input
+                dirty={errors.name}
                 value={name}
+                required
                 onChange={setName}
                 label="სახელი"
                 placeholder="გრიშა"
@@ -97,6 +163,7 @@ export default function UserForm() {
             </div>
             <div className="w-[48%] sm:w-[100%]">
               <Input
+                dirty={errors.surname}
                 value={surname}
                 onChange={setSurname}
                 label="გვარი"
@@ -110,9 +177,10 @@ export default function UserForm() {
             {teams && (
               <Dropdown
                 data={teams}
+                dirty={errors.team}
                 title="თიმი"
                 styles="my-[45px]"
-                onChange={(e) => setTeamId(e)}
+                onChange={(e) => setTeamId(e.outerText)}
                 selected={teamId}
               />
             )}
@@ -120,8 +188,9 @@ export default function UserForm() {
             {positions && (
               <Dropdown
                 data={positions}
+                dirty={errors.position}
                 title="პოზიცია"
-                onChange={(e) => setPositionId(e)}
+                onChange={(e) => setPositionId(e.outerText)}
                 selected={positionId}
               />
             )}
@@ -134,6 +203,7 @@ export default function UserForm() {
             <div className="my-[52px]">
               <Input
                 value={email}
+                dirty={errors.email}
                 onChange={setEmail}
                 label="მეილი"
                 placeholder="grish666@redberry.ge"
@@ -144,18 +214,19 @@ export default function UserForm() {
             </div>
             <Input
               value={phoneNumber}
+              dirty={errors.phone}
               onChange={setPhoneNumber}
-              type="number"
               label="ტელეფონის ნომერი"
               placeholder="+995 598 00 07 01"
               hint="უნდა აკმაყოფილებდეს ქართული მობ-ნომრის ფორმატს"
               styles="w-full h-[60px]"
             />
           </div>
-          <div className="mt-[87px] flex justify-end mb-[63px]">
-            <NavLink to="/laptop-form" activeClassName="active">
-              <Button title="შემდეგი" styles="px-[45px] py-[18px] " />
-            </NavLink>
+          <div
+            className="mt-[87px] flex justify-end mb-[63px]"
+            onClick={nextStep}
+          >
+            <Button title="შემდეგი" styles="px-[45px] py-[18px] " />
           </div>
         </div>
         {/* end of input wrapper */}
@@ -164,6 +235,7 @@ export default function UserForm() {
         <img
           src={FormLogo}
           width="85px"
+          alt="Logo"
           height="85px"
           className=" mt-[67px] mb-[45px]"
         />

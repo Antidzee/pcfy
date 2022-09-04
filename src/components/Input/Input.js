@@ -7,18 +7,27 @@ export default function Input({
   onChange,
   value,
   styles,
+  required,
   placeholder,
+  dirty,
   disabled = false,
 }) {
   return (
     <div className="flex flex-col items-start w-full">
       {label && (
-        <span className="mb-2 text-black font-bold  text-[18px] leading-[21px]">
+        <span
+          className={`mb-2 font-bold  text-[18px] leading-[21px] ${
+            dirty ? "text-[#E52F2F] " : "text-black"
+          }`}
+        >
           {label}
         </span>
       )}
       <input
-        className={`${styles} h-[60px] w-full border-[1.8px] border-[#8AC0E2] rounded-lg pl-[8px] py-2 font-helvetica text-[16px] leading-[21px] font-normal text-[#666666]`}
+        required={required}
+        className={`${styles} ${
+          dirty ? "border-[#E52F2F]" : "border-[#8AC0E2]"
+        } h-[60px] w-full border-[1.8px] rounded-lg pl-[8px] py-2 font-helvetica text-[16px] leading-[21px] font-normal text-[#666666]`}
         placeholder={placeholder}
         disabled={disabled}
         type={type}
@@ -30,7 +39,11 @@ export default function Input({
         }}
       />
       {hint && (
-        <span className="mt-2 text-dark-gray font-light font-helvetica text-[14px] leading-[21px]">
+        <span
+          className={`mt-2 font-light font-helvetica text-[14px] leading-[21px] ${
+            dirty ? "text-[#E52F2F] " : "text-dark-gray"
+          }`}
+        >
           {hint}
         </span>
       )}
